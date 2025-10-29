@@ -1,10 +1,10 @@
 /*
-  Analog pins for current (single-phase) and microphone → JSON NDJSON output
+  Analog pins for current and microphone → JSON output
   One JSON line per sample is sent to the serial port (terminated by '\n')
   Fields: millis, I_A (A), P_W (estimated W), sound_level (0..1023)
 
   IMPORTANT NOTE
-  The power P_W is only an ESTIMATE for single-phase systems: P = U_PH * I * cosφ.
+  The power P_W is only an ESTIMATE for three-phase systems: P = √3 * U_PH * I * cosφ.
   If the power factor varies (motor + variable drive), the error can be significant.
   Measuring both voltage and current simultaneously gives the true active power.
 */
@@ -13,7 +13,7 @@
 
 // Hardware configuration
 constexpr uint8_t PIN_CURRENT = A3;  // Current sensor (analog output)
-constexpr uint8_t PIN_SOUND   = A0;  // Grove analog microphone (LM2904)
+constexpr uint8_t PIN_SOUND   = A0;  // Analog microphone 
 
 // Acquisition settings
 constexpr uint32_t BAUD       = 1000000;  // 1 Mb/s, suitable for 500 Hz+
@@ -33,10 +33,10 @@ constexpr float CURRENT_CONVERSION_FACTOR = (5.0f / 1024.0f / 2.8f) * 20.0f;
 
 // Power estimation
 /*
-  Single-phase assumption: voltage U_PH is nearly constant, cosφ is assumed.
+  three-phase assumption: voltage U_PH is nearly constant, cosφ is assumed.
   Adjust U_PH and COS_PHI after calibration or measurement.
 */
-float U_PH   = 230.0f;  // V
+float U_PH   = 250.0f;  // V
 float COS_PHI = 0.85f;  // Dimensionless (to be calibrated)
 
 // Optional microphone smoothing
@@ -90,11 +90,10 @@ void loop() {
     S = sound_ema;
   }
 
-  // Estimated active power (single-phase)
-  float P_W = U_PH * COS_PHI * I_A;
+  // Estimated active power (three-phase)
+  float P_W = √3 * U_PH * COS_PHI * I_A;
 
   // JSON NDJSON publication (one line per sample)
-  // Format: {"millis":123456,"I_A":5.93,"P_W":2054.0,"sound_level":71}
   Serial.print('{');
   Serial.print("\"millis\":");      Serial.print(millis());
   Serial.print(",\"I_A\":");        Serial.print(I_A, 5);
