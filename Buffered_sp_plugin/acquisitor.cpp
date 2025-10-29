@@ -1,3 +1,7 @@
+/*
+  Author: paolo.bosetti@unitn.it
+Date: 2025-10-07
+*/
 #include "acquisitor.hpp"
 #include <iostream>
 #include <chrono>
