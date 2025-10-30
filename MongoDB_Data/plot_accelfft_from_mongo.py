@@ -18,8 +18,6 @@ Fenêtres (par rapport à 2025-10-15T08:40:26.805+00:00) :
 Sorties /tmp :
   op{i}_..._accel_[x|y|z]_t.png   (séries temporelles)
   op{i}_..._fft_[x|y|z].png       (FFT auto jusqu’à fs/2, amplitude ≥ 0)
-Console :
-  fs estimée et pics (fréquence, amplitude) par axe et par opération
 """
 
 from datetime import datetime, timedelta
@@ -30,7 +28,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import re
 
-# --------------- Utils ---------------
+# Utils 
 def sanitize_name(s: str) -> str:
     return re.sub(r"[^\w]+", "_", s.lower()).strip("_")
 
@@ -57,7 +55,7 @@ def concat_axes(batches):
             az.append(float(r[3]))
     return np.array(t_sec), np.array(ax), np.array(ay), np.array(az)
 
-# --------------- FFT ---------------
+# FFT 
 def estimate_fs_from_seconds(t_s: np.ndarray) -> float:
     if t_s.size < 2:
         return 0.0
@@ -107,7 +105,7 @@ def find_peaks_simple(f: np.ndarray,
             break
     return selected
 
-# --------------- Plots ---------------
+#Plots 
 def plot_timeseries(t_abs, s, title, ylabel, path, xmin, xmax):
     fig, ax = plt.subplots(figsize=(12, 4))
     ax.plot(t_abs, s)
@@ -137,7 +135,7 @@ def plot_fft_auto(f, A, title, path):
     fig.savefig(path, dpi=150)
     plt.close(fig)
 
-# --------------- Main ---------------
+# Main 
 def main():
     mongo_uri = "mongodb://localhost:27017"
     db_name   = "mads_test"
@@ -189,7 +187,7 @@ def main():
         eps = 1e-9
         m = (t_abs >= offset - eps) & (t_abs <= offset + dur + eps)
         if not np.any(m):
-            print("  ⚠️ Aucun point dans la fenêtre après découpe. "
+            print(" Aucun point dans la fenêtre après découpe. "
                   "Vérifie l'alignement t0_abs et les offsets.")
             # On continue quand même à tracer sans découpe pour diagnostiquer
             m = slice(None)
