@@ -1,3 +1,3 @@
 # Arduino plugins for MADS
-A modular Arduino-based data acquisition system integrated with the **MADS (Multi-Agent Distributed System)** framework.  
-This plugins enable **real-time acquisition and transmission of sensor data** such as current, vibration, and sound level from industrial machines or laboratory prototypes.
+A modular open-source system for real-time sensor data acquisition and analysis integrated into the MADS (Multi-Agent Distributed System) framework.
+This project was developed as part of the Renault Ampere – ICA Toulouse collaboration, focusing on the monitoring of CNC machining operations through current, vibration, and sound measurements.
