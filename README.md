@@ -64,7 +64,7 @@ The Arduino programs are responsible for acquiring raw data from sensors and sen
   "I_A": 1.42,
   "P_W": 533.68,
 }
-```json
+
 ---
 
 🧠 2. Buffered_sp_plugin (Source Plugin)
