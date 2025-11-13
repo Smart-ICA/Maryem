@@ -4,56 +4,71 @@ This project was developed as part of the Renault Ampere – ICA Toulouse collab
 
 ---
 
-## 🧩 Overview
+## 🧩 Global Description
 
-This repository provides:
-- **Arduino programs** for sensor data acquisition (current, vibration, and sound).  
-- A **MADS source plugin** (`Buffered_sp_plugin`) for real-time data collection from serial ports.  
-- **Filtering and FFT plugins** for frequency-domain analysis of acceleration and sound.  
-- **MongoDB scripts** for data visualization and statistical study.  
-- A **Web dashboard plugin** for monitoring and display of machine data in real time.  
-- An **Overpower alert plugin** for detecting excessive energy consumption during machining.
+The goal of this project is to build an **open-source and modular system** that acquires data from physical sensors, processes it in real time, and stores it for later analysis.
 
----
-
-## 🔧 Hardware Setup
-
-- **Arduino Uno Wifi** board  
-- **Sensors:**
+### The complete data chain: 
+1. **Arduino Uno Wifi** board  
+2. **Sensors:**
   - DFRobot Gravity Analog AC Current sensor: *SCT-013-020*  
   - Accelerometer: *MMA7660FC, 3axis*  
-  - Microphone: *Analog sound sensor (LM2904)*  
-- **CNC machine** (industrial environment)
-- **MADS system** running on **Linux**
-- **MongoDB** database for real-time data storage
+  - Microphone: *Analog sound sensor (LM2904)* 
+3. **MADS Source Plugin (Buffered_sp_plugin)** : real-time data collection via serial ports  
+4. **Processing Plugins** : FFT and filtering
+5. **MongoDB** : database for real-time data storage 
+6. **Sinks** : overpower alert detection and web dashboard  
+7. **Visualization Tools** : plot data using Python language  
+---
+
+## 🧱 Project Structure
+
+├── Arduino/
+│ ├── Current_Micro1_JSON.ino
+│ ├── Micro2_Accelerometre_JSON.ino
+│
+├── Buffered_sp_plugin/
+├── Filter_FFT_Acceleration/
+├── Filter_FFT_Sound/
+├── MongoDB_Data/
+│ ├── plot_current_from_mongo.py
+│ ├── plot_accelfft_from_mongo.py
+│ └── plot_sound_from_mongo.py
+│
+├── Overpower_alerte_plugin/
+├── Sink_FFT_Acceleration/
+├── Sink_FFT_Sound/
+├── Web_Dashboard_plugin/
+│
+└── README.md
 
 ---
 
-## 💡 Features
+## 🔌 1. Arduino Programs
 
-- Acquisition of multi-sensor data (current, vibration, sound) via serial JSON streams  
-- Data buffering and batch transmission using the **Buffered Source Plugin**  
-- Frequency analysis using **FFT filters**  
-- Detection of abnormal machine behavior (via Overpower Alert Plugin)  
-- Real-time visualization with Python and MongoDB tools  
-- Web dashboard for monitoring and visualization in real time.
+### Description
+The Arduino programs are responsible for acquiring raw data from sensors and sending it in **JSON format** through the serial port to the MADS system.
+
+### Files
+- `Current_Micro1_JSON.ino` → measures **current of the machine and sound level of the external environment**
+- `Micro2_Accelerometre_JSON.ino` → measures **vibrations (x, y, z) and sound level of the machine**
+
+### Example JSON Output
+```json
+{
+  "millis": 158426,
+  "acceleration": { "x_g": 0.27, "y_g": -0.98, "z_g": 0.03 },
+  "sound_level": 69,
+  "I_A": 1.42,
+  "P_W": 533.68,
+}
+🧠 2. Buffered_sp_plugin (Source Plugin)
+Description
+This plugin is an extension of the original Buffered plugin by Prof.Paolo Bosetti.
+It collects sensor data (current, acceleration, sound) from Arduino serial ports in NDJSON format and sends it to MADS as batched messages to reduce database overload.
+
+Type
+➡️ Source Plugin
 
 ---
 
-## 🚀 Quick Start
-
-### 1. Upload Arduino Programs
-
-1. Open one of the `.ino` files in `/Arduino/`:
-   - `Current_Micro1_JSON.ino` → sends current data  
-   - `Micro2_Accelerometre_JSON.ino` → sends acceleration and sound data  
-2. Upload the code to the Arduino board using the Arduino IDE.
-
----
-
-### 2. Build and Load the MADS Plugins
-
-1. Compile the plugin source files located in each `/plugin_name/` folder (e.g., `Buffered_sp_plugin`, `Filter_FFT_Acceleration`, etc.).  
-2. Install the plugin into the MADS source directory:
-   ```bash
-   sudo cmake --install .
