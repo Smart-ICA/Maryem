@@ -18,10 +18,12 @@ The goal of this project is to build an **open-source and modular system** that 
 4. **Processing Plugins** : FFT and filtering
 5. **MongoDB** : database for real-time data storage 
 6. **Sinks** : overpower alert detection and web dashboard  
-7. **Visualization Tools** : plot data using Python language  
+7. **Visualization Tools** : plot data using Python language
+    
 ---
 
 ## 🧱 Project Structure
+
 
 ├── Arduino/
 │ ├── Current_Micro1_JSON.ino
