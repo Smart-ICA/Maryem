@@ -53,7 +53,7 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ---
 
-🔧 3. Arduino Programs
+## 🔧 3. Arduino Programs
 
 The folder `Arduino/` contains the two independent firmwares used to acquire raw sensor data required by the MADS acquisition pipeline.
 
@@ -61,7 +61,7 @@ Two **Arduino Uno boards** are used simultaneously, each connected on a differen
 
 ---
 
-## 🛰️ Arduino Uno 1 – Accelerations + Machine Sound
+### 🛰️ Arduino Uno 1 – Accelerations + Machine Sound
 
 🔌 **Serial Port:** `/dev/ttyACM0`
 
@@ -90,7 +90,7 @@ It packages the measurements into the following JSON frame:
 
 ---
 
-## 🛰️ Arduino Uno 2 – Current, Power & External Sound
+### 🛰️ Arduino Uno 2 – Current, Power & External Sound
 
 🔌 **Serial Port:** `/dev/ttyACM1`
 
@@ -122,7 +122,7 @@ It sends JSON frames of the form:
 
 ---
 
-##  Serial Communication Summary
+###  Serial Communication Summary
 
 | Arduino    | Sensors                               | Port           | Baud Rate     | File                            |
 | ---------- | ------------------------------------- | -------------- | ------------- | ------------------------------- |
@@ -132,7 +132,7 @@ It sends JSON frames of the form:
 ---
 
 
- ⚙️ 4. Compilation & Installation (Linux / MADS)
+ ## ⚙️ 4. Compilation & Installation (Linux / MADS)
 
 All C++ plugins follow the standard MADS build procedure.
 
