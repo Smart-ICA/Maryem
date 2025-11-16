@@ -255,8 +255,8 @@ mads source buffered_sp.plugin -n buffered_sp
 **Type :** MADS *Filter Plugins*
 
 #### Plugins included
-- `accel_fft` — real-time FFT for acceleration (X/Y/Z axes)
-- `sound_fft` — real-time FFT for machine sound level
+- `accel_fft` : real-time FFT for acceleration (X/Y/Z axes)
+- `sound_fft` : real-time FFT for machine sound level
 
 ---
 
