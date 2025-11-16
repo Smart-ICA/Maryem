@@ -20,6 +20,7 @@ All plugins are written in C++ for the MADS framework and designed to run on Lin
 
 ## 🧩 1. Global Description
 ---
+
 The goal of this project is to build an **open-source and modular system** that acquires data from physical sensors, processes it in real time, and stores it for later analysis.
 
 ### The complete data chain: 
