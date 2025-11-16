@@ -249,3 +249,75 @@ The plugin can be launched with this command line :
 mads source buffered_sp.plugin -n buffered_sp
 ```
 ---
+
+##### 5.2 Filter Plugins — FFT Processing for Acceleration & Sound
+
+**Type :** MADS *Filter Plugins*
+
+#### Plugins included
+- `accel_fft` — real-time FFT for acceleration (X/Y/Z axes)
+- `sound_fft` — real-time FFT for machine sound level
+
+---
+
+#### Purpose
+
+These two filter plugins compute the **Fast Fourier Transform (FFT)** of acceleration and sound signals in real time.
+
+This processing converts raw signals into the frequency domain, making it possible to detect:
+
+- dominant mechanical frequencies
+- harmonics linked to spindle rotation
+- abnormal peaks (possible defects)
+- differences between machining operations
+
+The two plugins share the same operating principles, with different input signals.
+
+---
+
+#### Features
+
+- Sliding-window FFT
+- Configurable sampling frequency and window size
+- Automatic band extraction 
+- Threshold-based peak detection
+- Alarm integration via GUI sinks
+- Designed for machining diagnostics
+
+---
+
+#### MADS Configuration in the INI Settings
+
+The plugin supports the following settings in the `mads.ini` file :
+
+---
+
+##### Acceleration FFT filter Plugin — `accel_fft`
+
+```ini
+[accel_fft]
+sub_topic = ["Ampere"]
+axis = "x"              
+fs        = 500          
+win_size  = 256         
+f_min     = 10
+f_max     = 250
+threshold = 0.5
+confirm_windows = 2    
+```
+---
+
+##### Sound FFT filter Plugin — `sound_fft`
+
+```ini
+[sound_fft]
+sub_topic = ["arduino"]
+fs        = 500
+win_size  = 256
+f_min     = 0
+f_max     = 250
+threshold = 0.25
+confirm_windows = 2
+```
+---
+
