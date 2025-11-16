@@ -64,7 +64,7 @@ Two **Arduino Uno boards** are used simultaneously, each connected on a differen
 ## 🛰️ Arduino Uno 1 – Accelerations + Machine Sound
 
 🔌 **Serial Port:** `/dev/ttyACM0`
----
+
 📟 **Firmware:** `Micro2_Accelerometre_JSON.ino`
 
 This Arduino reads:
@@ -93,7 +93,7 @@ It packages the measurements into the following JSON frame:
 ## 🛰️ Arduino Uno 2 – Current, Power & External Sound
 
 🔌 **Serial Port:** `/dev/ttyACM1`
----
+
 📟 **Firmware:** `Current_Micro1_JSON.ino`
 
 This Arduino is dedicated to:
