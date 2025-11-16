@@ -61,9 +61,10 @@ Two **Arduino Uno boards** are used simultaneously, each connected on a differen
 
 ---
 
-## 🛰️ Arduino Uno #1 – Accelerations + Machine Sound
+## 🛰️ Arduino Uno 1 – Accelerations + Machine Sound
 
 🔌 **Serial Port:** `/dev/ttyACM0`
+---
 📟 **Firmware:** `Micro2_Accelerometre_JSON.ino`
 
 This Arduino reads:
@@ -89,9 +90,10 @@ It packages the measurements into the following JSON frame:
 
 ---
 
-## 🛰️ Arduino Uno #2 – Current, Power & External Sound
+## 🛰️ Arduino Uno 2 – Current, Power & External Sound
 
 🔌 **Serial Port:** `/dev/ttyACM1`
+---
 📟 **Firmware:** `Current_Micro1_JSON.ino`
 
 This Arduino is dedicated to:
@@ -120,23 +122,23 @@ It sends JSON frames of the form:
 
 ---
 
-## 📡 Serial Communication Summary
+##  Serial Communication Summary
 
 | Arduino    | Sensors                               | Port           | Baud Rate     | File                            |
 | ---------- | ------------------------------------- | -------------- | ------------- | ------------------------------- |
-| **Uno #1** | Accelerations (x,y,z) + machine sound | `/dev/ttyACM0` | **1,000,000** | `Micro2_Accelerometre_JSON.ino` |
-| **Uno #2** | Current, power, external sound        | `/dev/ttyACM1` | **1,000,000** | `Current_Micro1_JSON.ino`       |
+| **Uno 1** | Accelerations (x,y,z) + machine sound | `/dev/ttyACM0` | **1,000,000** | `Micro2_Accelerometre_JSON.ino` |
+| **Uno 2** | Current, power, external sound        | `/dev/ttyACM1` | **1,000,000** | `Current_Micro1_JSON.ino`       |
 
 ---
 
 
-🧠 2. Buffered_sp_plugin (Source Plugin)
+ 2. Buffered_sp_plugin (Source Plugin)
 Description
 This plugin is an extension of the original Buffered plugin by Prof.Paolo Bosetti.
 It collects sensor data (current, acceleration, sound) from Arduino serial ports in NDJSON format and sends it to MADS as batched messages to reduce database overload.
 
 Type
-➡️ Source Plugin
+Source Plugin
 
 ---
 
