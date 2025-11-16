@@ -98,7 +98,7 @@ It packages the measurements into the following JSON frame:
 
 This Arduino is dedicated to:
 
-* Measuring the spindle current using SCT-013 on a DFRobot Gravity V7 interface
+* Measuring the spindle current using DFRobot analog current sensor SCT-013 20A 
 * Computing instantaneous power using
   `P = √3 × U × I × cosφ`, with `U = 250 V`, `cosφ ≈ 0.85`
 * Recording the external environmental sound level near the CNC machine
@@ -243,7 +243,7 @@ map_ports = [0, 0, 0]
 
 #### Run
 
-The plugin can be launched with this command line:
+The plugin can be launched with this command line :
 
 ```bash
 mads source buffered_sp.plugin -n buffered_sp
