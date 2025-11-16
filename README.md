@@ -250,7 +250,7 @@ mads source buffered_sp.plugin -n buffered_sp
 ```
 ---
 
-##### 5.2 Filter Plugins — FFT Processing for Acceleration & Sound
+### 5.2 Filter Plugins — FFT Processing for Acceleration & Sound
 
 **Type :** MADS *Filter Plugins*
 
