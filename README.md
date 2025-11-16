@@ -1,7 +1,20 @@
 # Sensor Data Acquisition and Analysis Plugins for MADS
-A modular open-source system for real-time sensor data acquisition and analysis integrated into the MADS (Multi-Agent Distributed System) framework.
-This project was developed as part of the Renault Ampere – ICA Toulouse collaboration, focusing on the monitoring of CNC machining operations through current, vibration, and sound measurements.
+This repository contains a complete set of custom MADS plugins developed for real-time acquisition, processing, and visualization of industrial sensor data (current, vibration, and sound).
+It includes:
 
+- Arduino acquisition firmware
+
+- A buffered source plugin for serial JSON streams
+
+- FFT-based filter plugins
+
+- GUI and alerting plugins
+
+- A web dashboard
+
+- Tools for plotting data from MongoDB
+
+All plugins are written in C++ for the MADS framework and designed to run on Linux.
 ---
 
 ## 🧩 Global Description
