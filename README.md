@@ -219,40 +219,27 @@ map_paths = [
 map_to    = [0, 1, 2]
 map_ports = [0, 0, 0]
 ```
-pub_topic
-Topic where current + environmental sound measurements are published.
 
-capacity
-Maximum number of rows the buffer will store before sending.
 
-ports
-Serial ports assigned to this plugin.
-/dev/ttyACM1 is the Arduino reading current and environmental sound.
+**pub_topic :** Topic where sensor measurements are published.
 
-baud
-Must match the Arduino sketch (1,000,000 baud).
+**capacity :** Maximum number of rows the buffer can store before sending.
 
-timeout
-Serial read timeout.
+**ports :** Serial ports assigned to the plugin.  
 
-ts_key
-Timestamp key extracted from Arduino JSON messages.
+**baud :** Baud rate that must match the Arduino sketch (`1,000,000` baud).
 
-channels
-Number of numeric data channels:
+**timeout :** Timeout used for serial reading.
 
-Current (I_A)
+**ts_key :** Timestamp key extracted from Arduino JSON messages.
 
-Power (P_W)
+**channels :** Number of numeric data channels.
 
-Sound level
+**map_paths :** JSON paths extracted from the incoming NDJSON stream.
 
-map_paths
-Paths to extract from the incoming NDJSON stream.
+**map_to :** Maps each extracted value to an internal buffer index.
 
-map_to
-Maps each extracted value to an internal buffer index.
+**map_ports :** Serial port associated with each mapped value.  
 
-map_ports
-Only one serial port used here → [0, 0, 0].
+
 
