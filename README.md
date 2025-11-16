@@ -241,5 +241,9 @@ map_ports = [0, 0, 0]
 
 **map_ports :** Serial port associated with each mapped value.  
 
+#### Run
 
-
+```bash
+mads source buffered_sp.plugin -n buffered_sp
+```
+---
