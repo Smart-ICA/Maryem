@@ -434,7 +434,7 @@ This dashboard is accessible from any browser connected to the same network.
 
 #### MADS Configuration in the INI Settings
 
-The plugins support the following settings in the `mads.ini` file :
+The plugin support the following settings in the `mads.ini` file :
 
 ```ini
 [web_dashboard]
@@ -474,3 +474,89 @@ Or from another device on the same network:
 ```bash
 http://<your-machine-ip>:8088
 ```
+
+### 5.5 Sink Plugin — `overpower_email`
+
+**Type :** MADS *Sink Plugin*
+
+#### Plugin included
+- `overpower_email`
+
+#### Purpose
+
+The  `overpower_email` plugin monitors the estimated spindle power coming from the Arduino current-sensor stream and automatically sends an email alert whenever the power exceeds a predefined threshold.
+
+In addition to email notifications, the plugin also launches a GUI alarm window displaying the alert and playing a warning sound.
+
+This plugin is intended to warn operators of abnormal cutting power, possible tool issues, overload conditions, or safety-related events.
+
+#### Features
+
+- Real-time power monitoring from the Ampere topic
+- Automatic email alerts when exceeding a threshold
+- Minimum interval between alerts (to avoid spamming)
+- GUI alert window for on-machine supervision
+- Optional audio alarm (Linux speaker-test)
+- Historical logging of all alerts in JSONL
+- Fully configurable via mads.ini
+
+#### MADS Configuration in the INI Settings
+
+The plugin support the following settings in the `mads.ini` file :
+
+```ini
+[overpower_email]
+sub_topic = ["Ampere"]
+threshold_W = 20
+min_alert_interval_s = 300
+to_email = "recipient@gmail.com"
+machine_name = "Tour CN MFJA"
+python_path      = "/path/to/venv/bin/python3"
+script_path      = "/path/to/email.alert.py"
+gui_python_path = "/path/to/venv/bin/python3"
+gui_script_path = "/path/to/gui_overpower_alert.py"
+gui_fullscreen = true
+gui_beep = true
+gui_beep_backend = "speaker-test"
+gui_beep_interval_ms = 700
+gui_timeout_s = 0   
+history_path = "/path/to/alerts_history.jsonl"
+```
+
+**sub_topic :** Topic where the plugin listens for incoming power values (from the Arduino “current + microphone” stream).
+
+**threshold_W :** Power threshold (in Watts) above which an alert is triggered.
+
+**min_alert_interval_s :** Minimum number of seconds between two email alerts (anti-spam protection).
+
+**to_email :** Recipient address for alert emails.
+
+**machine_name :** Displayed in emails and GUI as the monitored machine.
+
+**python_path :** Python interpreter for the email alert script (virtual environment recommended).
+
+**script_path :** Path to the Python script used to send email notifications.
+
+**gui_python_path :** Python interpreter used for the GUI alert window.
+
+**gui_script_path :** Path to the GUI script that displays alerts in real time.
+
+**gui_fullscreen :** If true, the alert GUI opens full screen.
+
+**gui_beep :** Enables acoustic alarm.
+
+**gui_beep_backend :** Command used for generating sound (Linux-compatible).
+
+**gui_beep_interval_ms :** Interval between audio beeps.
+
+**gui_timeout_s :** Auto-close timeout (0 = never closes).
+
+**history_path :** File where all alerts are stored in JSON Lines format.
+
+#### Run
+
+The plugins can be launched with this command lines :
+```bash
+mads sink overpower_email.plugin -n overpower_email
+```
+The GUI window starts automatically when power exceeds the threshold.
