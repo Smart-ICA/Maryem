@@ -38,7 +38,7 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ## 🧱 Project Structure
 
-
+```text
 ├── Arduino/                       # Arduino firmwares (current, accelerometer, sound)
 ├── Buffered_sp_plugin/            # Source plugin for reading NDJSON sensor streams
 ├── Filter_FFT_Acceleration/       # Filter plugin computing FFT of vibration signals
@@ -49,7 +49,7 @@ The goal of this project is to build an **open-source and modular system** that 
 ├── Sink_FFT_Sound/                # Sink plugin visualizing sound FFT
 ├── Web_Dashboard_plugin/          # Web-based dashboard for real-time monitoring
 └── README.md
-
+```
 
 ---
 
