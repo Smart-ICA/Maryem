@@ -1,4 +1,4 @@
-# Sensor Data Acquisition and Analysis Plugins for MADS
+# MADS Sensor Acquisition & Monitoring Plugins
 This repository contains a complete set of custom MADS plugins developed for real-time acquisition, processing, and visualization of industrial sensor data (current, vibration, and sound).
 It includes:
 
@@ -15,6 +15,7 @@ It includes:
 - Tools for plotting data from MongoDB
 
 All plugins are written in C++ for the MADS framework and designed to run on Linux.
+
 ---
 
 ## 🧩 Global Description
@@ -38,24 +39,17 @@ The goal of this project is to build an **open-source and modular system** that 
 ## 🧱 Project Structure
 
 
-├── Arduino/
-│ ├── Current_Micro1_JSON.ino
-│ ├── Micro2_Accelerometre_JSON.ino
-│
-├── Buffered_sp_plugin/
-├── Filter_FFT_Acceleration/
-├── Filter_FFT_Sound/
-├── MongoDB_Data/
-│ ├── plot_current_from_mongo.py
-│ ├── plot_accelfft_from_mongo.py
-│ └── plot_sound_from_mongo.py
-│
-├── Overpower_alerte_plugin/
-├── Sink_FFT_Acceleration/
-├── Sink_FFT_Sound/
-├── Web_Dashboard_plugin/
-│
+├── Arduino/                       # Arduino firmwares (current, accelerometer, sound)
+├── Buffered_sp_plugin/            # Source plugin for reading NDJSON sensor streams
+├── Filter_FFT_Acceleration/       # Filter plugin computing FFT of vibration signals
+├── Filter_FFT_Sound/              # Filter plugin computing FFT of microphone signals
+├── MongoDB_Data/                  # Python tools for plotting MongoDB data
+├── Overpower_alerte_plugin/       # Sink plugin sending alert notifications
+├── Sink_FFT_Acceleration/         # Sink plugin visualizing vibration FFT
+├── Sink_FFT_Sound/                # Sink plugin visualizing sound FFT
+├── Web_Dashboard_plugin/          # Web-based dashboard for real-time monitoring
 └── README.md
+
 
 ---
 
