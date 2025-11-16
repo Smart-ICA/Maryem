@@ -57,12 +57,12 @@ The goal of this project is to build an **open-source and modular system** that 
 
 The `Arduino/` folder contains the firmwares used to acquire raw sensor data from **two independent Arduino Uno boards**, each connected to a different serial port.
 
-- **Arduino Uno #1** → `/dev/ttyACM0`  
+- **Arduino Uno 1** → `/dev/ttyACM0`  
   **Measures:**
   - Machine electrical **current** and **power**  (via SCT-013 sensor + signal conditioning)
   - External **environmental sound** level (microphone placed near the CNC)
 
-- **Arduino Uno #2** → `/dev/ttyACM1`  
+- **Arduino Uno 2** → `/dev/ttyACM1`  
   **Measures:**
   - **3-axis accelerations** of the CNC mandrel
   - Machine **sound** (microphone mounted inside the machine)
@@ -75,8 +75,8 @@ Both Arduinos send data as **newline-delimited JSON (NDJSON)** at **1,000,000 ba
 
 | File | Description |
 |------|--------------|
-| [`Current_Micro1_JSON.ino`](Arduino/Current_Micro1_JSON.ino) | Reads current of the machine and sound level of the external environment and outputs NDJSON (Arduino Uno #1) |
-| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads accelerations (x, y, z) and sound level of the machine and outputs NDJSON (Arduino Uno #2) |
+| [`Current_Micro1_JSON.ino`](Arduino/Current_Micro1_JSON.ino) | Reads current of the machine and sound level of the external environment and outputs NDJSON (Arduino Uno 1) |
+| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads accelerations (x, y, z) and sound level of the machine and outputs NDJSON (Arduino Uno 2) |
 
 ---
 
