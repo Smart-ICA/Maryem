@@ -151,4 +151,45 @@ sudo cmake --install build
 ```
 ---
 
+## 🧩 5. Plugins Overview
+
+This repository provides functional plugins, all developed for CNC sensor monitoring.
+
+### 5.1 Source Plugin — `buffered_sp_plugin`
+
+**Type:** MADS *Source Plugin*
+
+#### Purpose
+
+Reads NDJSON data from **multiple serial ports (two Arduinos)**, buffers it, timestamps it, and publishes it to the MADS broker.
+
+#### Features
+
+- Multi-port acquisition  
+- Batch buffering to avoid overload  
+- Timestamp alignment  
+- Fully configurable channel mapping  
+
+---
+
+#### Configuration Example (`mads.ini`)
+
+```ini
+[source.buffered_sp]
+ports = ["/dev/ttyACM0", "/dev/ttyACM1"]
+baud = 1000000
+channels = 8
+ts_key = "millis"
+
+map = [
+    { port = 0, path = "I_A",              to = 0 },
+    { port = 0, path = "P_W",              to = 1 },
+    { port = 0, path = "sound_level",      to = 2 },
+
+    { port = 1, path = "acceleration.x_g", to = 3 },
+    { port = 1, path = "acceleration.y_g", to = 4 },
+    { port = 1, path = "acceleration.z_g", to = 5 },
+    { port = 1, path = "sound_level",      to = 6 }
+]
+```
 
