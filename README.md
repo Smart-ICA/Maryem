@@ -243,6 +243,8 @@ map_ports = [0, 0, 0]
 
 #### Run
 
+The plugin can be launched with this command line:
+
 ```bash
 mads source buffered_sp.plugin -n buffered_sp
 ```
