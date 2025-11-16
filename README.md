@@ -338,9 +338,92 @@ confirm_windows = 2
 
 #### Run
 ---
-The plugin can be launched with this command line :
+The plugins can be launched with this command lines :
 
 ```bash
 mads filter accel_fft.plugin -n accel_fft
 mads filter sound_fft.plugin -n sound_fft
+```
+
+
+### 5.3 Sink Plugins — `accel_fft_alarm_gui` & `sound_fft_alarm_gui`
+
+**Type :** MADS *Sink Plugins*
+
+#### Plugins included
+---
+- `accel_fft_alarm_gui` : real-time display of FFT for acceleration (X/Y/Z axes)
+- `sound_fft_alarm_gui` : real-time display of FFT for machine sound level
+
+
+#### Purpose
+---
+These GUI sink plugins visualize the results of the FFT filters and generate graphical alarms when a peak is detected.
+
+They provide:
+
+- real-time FFT display
+- threshold-based alarm highlighting
+- optional fullscreen mode
+
+#### Features
+---
+- Live FFT visualization
+- Alarm indicators
+- Simple GUI for operators
+- Fully configurable Python backend
+
+
+#### MADS Configuration in the INI Settings
+
+The plugins support the following settings in the `mads.ini` file :
+
+---
+
+##### Acceleration FFT Alarm GUI — accel_fft_alarm_gui
+---
+```ini
+[accel_fft_alarm_gui]
+sub_topic   = ["accel_fft"]
+python_path = "/path/to/venv/bin/python3"
+script_path = "/path/to/gui_sound_fft.py"
+title       = "FFT Accélération – Monitoring"   
+```
+
+
+##### Sound FFT Alarm GUI — sound_fft_alarm_gui
+---
+```ini
+[sound_fft_alarm_gui]
+sub_topic        = ["sound_fft"]
+python_path      = "/path/to/venv/bin/python3"
+script_path      = "/path/to/gui_sound_fft.py"
+state_path       = "/tmp/sound_fft_gui_state.json"
+title            = "FFT Son – Monitoring"
+fullscreen       = true
+f_min            = 0
+f_max            = 4000
+```
+
+**sub_topic :** Topic produced by the associated FFT filter plugin.
+
+**python_path :** Path to the Python virtual environment used to launch the GUI.
+
+**script_path :** Script that displays the FFT graph.
+
+**title :** Title of the GUI window.
+
+**fullscreen (sound FFT) :** Whether to display the GUI in fullscreen.
+
+**f_min / f_max :** GUI display band selection.
+
+
+#### Run
+---
+The plugins can be launched with this command lines :
+
+```bash
+mads sink accel_fft_alarm_gui.plugin -n accel_fft_alarm_gui
+mads sink sound_fft_alarm_gui.plugin -n sound_fft_alarm_gui
+
 ```
