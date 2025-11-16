@@ -64,7 +64,7 @@ The folder `Arduino/` contains the firmware used to acquire raw sensor data.
 | File | Description |
 |------|--------------|
 | [`Current_Micro1_JSON.ino`](Arduino/Current_Micro1_JSON.ino) | Reads current of the machine and sound level of the external environment and outputs NDJSON |
-| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads vibrations (x, y, z) and sound level of the machine and outputs NDJSON |
+| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads accelerations (x, y, z) and sound level of the machine and outputs NDJSON |
 
 ---
 
