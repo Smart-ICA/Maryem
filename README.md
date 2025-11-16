@@ -55,14 +55,23 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ## 🔌 1. Arduino Programs
 
-### Description
-The Arduino programs are responsible for acquiring raw data from sensors and sending it in **JSON format** through the serial port to the MADS system.
+The folder `Arduino/` contains the firmware used to acquire raw sensor data.
 
-### Files
-- `Current_Micro1_JSON.ino` → measures **current of the machine and sound level of the external environment**
-- `Micro2_Accelerometre_JSON.ino` → measures **vibrations (x, y, z) and sound level of the machine**
+---
 
-### Example JSON Output
+### 🧩 Available Firmwares
+
+| File | Description |
+|------|--------------|
+| [`Current_Micro1_JSON.ino`](Arduino/Current_Micro1_JSON.ino) | Reads current of the machine and sound level of the external environment and outputs NDJSON |
+| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads vibrations (x, y, z) and sound level of the machine and outputs NDJSON |
+
+---
+
+### 📤 Output Format
+
+Arduino sends **newline-delimited JSON (NDJSON)**:
+
 ```json
 {
   "millis": 158426,
