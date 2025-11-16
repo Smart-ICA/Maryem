@@ -157,7 +157,7 @@ This repository provides functional plugins, all developed for CNC sensor monito
 
 ### 5.1 Source Plugin — `buffered_sp_plugin`
 
-**Type:** MADS *Source Plugin*
+**Type :** MADS *Source Plugin*
 
 #### Purpose
 
@@ -176,24 +176,49 @@ Reads NDJSON data from **multiple serial ports (two Arduinos)**, buffers it, tim
 
 The plugin supports the following settings in the INI file :
 
-##### Source Plugin for Arduino #2 — Accelerometer + Machine Microphone
+##### Source Plugin for Arduino 1 — Accelerometer + Machine Microphone
 
 ```ini
-[source.buffered_sp]
-ports = ["/dev/ttyACM0", "/dev/ttyACM1"]
+[buffered_accel_mic]
+pub_topic = "accel_mic"
+capacity  = 1000
+ports = ["/dev/ttyACM0"]
 baud = 1000000
-channels = 8
+timeout = 50
 ts_key = "millis"
+channels = 4
 
-map = [
-    { port = 0, path = "I_A",              to = 0 },
-    { port = 0, path = "P_W",              to = 1 },
-    { port = 0, path = "sound_level",      to = 2 },
-
-    { port = 1, path = "acceleration.x_g", to = 3 },
-    { port = 1, path = "acceleration.y_g", to = 4 },
-    { port = 1, path = "acceleration.z_g", to = 5 },
-    { port = 1, path = "sound_level",      to = 6 }
+map_paths = [
+  "acceleration.x_g",
+  "acceleration.y_g",
+  "acceleration.z_g",
+  "sound_level"
 ]
+
+map_to    = [0, 1, 2, 3]
+map_ports = [0, 0, 0, 0]
+
 ```
+##### Source Plugin for Arduino 2 — Current + Environmental Microphone
+```ini
+[buffered_currents_full]
+pub_topic = "currents_full"
+capacity  = 1000
+ports = ["/dev/ttyACM1"]
+baud = 1000000
+timeout = 50
+ts_key = "millis"
+channels = 3
+
+map_paths = [
+  "I_A",
+  "P_W",
+  "sound_level"
+]
+
+map_to    = [0, 1, 2]
+map_ports = [0, 0, 0]
+
+---
+
 
