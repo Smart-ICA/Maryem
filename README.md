@@ -99,7 +99,7 @@ This Arduino is dedicated to:
 * Measuring the spindle current using SCT-013 on a DFRobot Gravity V7 interface
 * Computing instantaneous power using
   `P = √3 × U × I × cosφ`, with `U = 250 V`, `cosφ ≈ 0.85`
-* Recording the external environmental sound level near the CNC enclosure
+* Recording the external environmental sound level near the CNC machine
 
 It sends JSON frames of the form:
 
