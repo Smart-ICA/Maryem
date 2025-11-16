@@ -18,7 +18,7 @@ All plugins are written in C++ for the MADS framework and designed to run on Lin
 
 ---
 
-## 🧩 Global Description
+## 🧩 1. Global Description
 
 The goal of this project is to build an **open-source and modular system** that acquires data from physical sensors, processes it in real time, and stores it for later analysis.
 
@@ -36,7 +36,7 @@ The goal of this project is to build an **open-source and modular system** that 
     
 ---
 
-## 🧱 Project Structure
+## 🧱 2. Project Structure
 
 ```text
 ├── Arduino/                       # Arduino firmwares (current, accelerometer, sound)
@@ -53,7 +53,7 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ---
 
-# 🔧 1. Arduino Programs
+# 🔧 3. Arduino Programs
 
 The folder `Arduino/` contains the two independent firmwares used to acquire raw sensor data required by the MADS acquisition pipeline.
 
@@ -65,7 +65,7 @@ Two **Arduino Uno boards** are used simultaneously, each connected on a differen
 
 🔌 **Serial Port:** `/dev/ttyACM0`
 
-📟 **Firmware:** `Micro2_Accelerometre_JSON.ino`
+📄 **File:** `Micro2_Accelerometre_JSON.ino`
 
 This Arduino reads:
 
@@ -94,7 +94,7 @@ It packages the measurements into the following JSON frame:
 
 🔌 **Serial Port:** `/dev/ttyACM1`
 
-📟 **Firmware:** `Current_Micro1_JSON.ino`
+📄 **File:**  `Current_Micro1_JSON.ino`
 
 This Arduino is dedicated to:
 
@@ -132,16 +132,23 @@ It sends JSON frames of the form:
 ---
 
 
- 2. Buffered_sp_plugin (Source Plugin)
-Description
-This plugin is an extension of the original Buffered plugin by Prof.Paolo Bosetti.
-It collects sensor data (current, acceleration, sound) from Arduino serial ports in NDJSON format and sends it to MADS as batched messages to reduce database overload.
+# ⚙️ 4. Compilation & Installation (Linux / MADS)
 
-Type
-Source Plugin
+All C++ plugins follow the standard MADS build procedure.
 
+### Build
+
+```bash
+cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$(mads -p)"
+cmake --build build -j4
+```
 ---
 
+### Install
 
+```bash
+sudo cmake --install build
+```
+---
 
 
