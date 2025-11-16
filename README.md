@@ -283,13 +283,10 @@ The two plugins share the same operating principles, with different input signal
 - Alarm integration via GUI sinks
 - Designed for machining diagnostics
 
----
 
 #### MADS Configuration in the INI Settings
 
 The plugins support the following settings in the `mads.ini` file :
-
----
 
 ##### Acceleration FFT filter Plugin — `accel_fft`
 
@@ -318,8 +315,6 @@ f_max     = 250
 threshold = 0.25
 confirm_windows = 2
 ```
----
-
 
 **sub_topic :** Topic containing the sensor data of sound and accelerations : Topic listens by the plugin (Ampere and arduino).
 
@@ -337,7 +332,7 @@ confirm_windows = 2
 
 
 #### Run
----
+
 The plugins can be launched with this command lines :
 
 ```bash
@@ -347,17 +342,16 @@ mads filter sound_fft.plugin -n sound_fft
 
 
 ### 5.3 Sink Plugins — `accel_fft_alarm_gui` & `sound_fft_alarm_gui`
-
+---
 **Type :** MADS *Sink Plugins*
 
 #### Plugins included
----
 - `accel_fft_alarm_gui` : real-time display of FFT for acceleration (X/Y/Z axes)
 - `sound_fft_alarm_gui` : real-time display of FFT for machine sound level
 
 
 #### Purpose
----
+
 These GUI sink plugins visualize the results of the FFT filters and generate graphical alarms when a peak is detected.
 
 They provide:
@@ -367,7 +361,7 @@ They provide:
 - optional fullscreen mode
 
 #### Features
----
+
 - Live FFT visualization
 - Alarm indicators
 - Simple GUI for operators
@@ -378,10 +372,8 @@ They provide:
 
 The plugins support the following settings in the `mads.ini` file :
 
----
-
 ##### Acceleration FFT Alarm GUI — accel_fft_alarm_gui
----
+
 ```ini
 [accel_fft_alarm_gui]
 sub_topic   = ["accel_fft"]
@@ -392,7 +384,7 @@ title       = "FFT Accélération – Monitoring"
 
 
 ##### Sound FFT Alarm GUI — sound_fft_alarm_gui
----
+
 ```ini
 [sound_fft_alarm_gui]
 sub_topic        = ["sound_fft"]
@@ -419,11 +411,10 @@ f_max            = 4000
 
 
 #### Run
----
+
 The plugins can be launched with this command lines :
 
 ```bash
 mads sink accel_fft_alarm_gui.plugin -n accel_fft_alarm_gui
 mads sink sound_fft_alarm_gui.plugin -n sound_fft_alarm_gui
-
 ```
