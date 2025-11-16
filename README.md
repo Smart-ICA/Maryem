@@ -1,4 +1,5 @@
 # MADS Sensor Acquisition & Monitoring Plugins
+---
 This repository contains a complete set of custom MADS plugins developed for real-time acquisition, processing, and visualization of industrial sensor data (current, vibration, and sound).
 It includes:
 
@@ -16,10 +17,9 @@ It includes:
 
 All plugins are written in C++ for the MADS framework and designed to run on Linux.
 
----
 
 ## 🧩 1. Global Description
-
+---
 The goal of this project is to build an **open-source and modular system** that acquires data from physical sensors, processes it in real time, and stores it for later analysis.
 
 ### The complete data chain: 
@@ -37,7 +37,7 @@ The goal of this project is to build an **open-source and modular system** that 
 ---
 
 ## 🧱 2. Project Structure
-
+---
 ```text
 ├── Arduino/                       # Arduino firmwares (current, accelerometer, sound)
 ├── Buffered_sp_plugin/            # Source plugin for reading NDJSON sensor streams
@@ -51,15 +51,11 @@ The goal of this project is to build an **open-source and modular system** that 
 └── README.md
 ```
 
----
-
 ## 🔧 3. Arduino Programs
-
+---
 The folder `Arduino/` contains the two independent firmwares used to acquire raw sensor data required by the MADS acquisition pipeline.
 
 Two **Arduino Uno boards** are used simultaneously, each connected on a different serial port and streaming newline-delimited JSON (NDJSON).
-
----
 
 ### 🛰️ Arduino Uno 1 – Accelerations + Machine Sound
 
@@ -120,7 +116,6 @@ It sends JSON frames of the form:
 * `P_W` → computed electrical power (W)
 * `sound_level` → external acoustic level near the CNC
 
----
 
 ###  Serial Communication Summary
 
@@ -133,7 +128,7 @@ It sends JSON frames of the form:
 
 
  ## ⚙️ 4. Compilation & Installation (Linux / MADS)
-
+---
 All C++ plugins follow the standard MADS build procedure.
 
 ### Build
@@ -142,17 +137,15 @@ All C++ plugins follow the standard MADS build procedure.
 cmake -Bbuild -DCMAKE_INSTALL_PREFIX="$(mads -p)"
 cmake --build build -j4
 ```
----
 
 ### Install
 
 ```bash
 sudo cmake --install build
 ```
----
 
 ## 🧩 5. Plugins Overview
-
+---
 This repository provides functional plugins, all developed for CNC sensor monitoring.
 
 ### 5.1 Source Plugin — `buffered_sp_plugin`
@@ -169,8 +162,6 @@ Reads NDJSON data from **multiple serial ports (two Arduinos)**, buffers it, tim
 - Batch buffering to avoid overload  
 - Timestamp alignment  
 - Fully configurable channel mapping  
-
----
 
 #### MADS Configuration in the INI settings
 
@@ -220,7 +211,6 @@ map_to    = [0, 1, 2]
 map_ports = [0, 0, 0]
 ```
 
-
 **pub_topic :** Topic where sensor measurements are published.
 
 **capacity :** Maximum number of rows the buffer can store before sending.
@@ -257,8 +247,6 @@ mads source buffered_sp.plugin -n buffered_sp
 - `accel_fft` : real-time FFT for acceleration (X/Y/Z axes)
 - `sound_fft` : real-time FFT for machine sound level
 
----
-
 #### Purpose
 
 These two filter plugins compute the **Fast Fourier Transform (FFT)** of acceleration and sound signals in real time.
@@ -271,8 +259,6 @@ This processing converts raw signals into the frequency domain, making it possib
 - differences between machining operations
 
 The two plugins share the same operating principles, with different input signals.
-
----
 
 #### Features
 
@@ -301,7 +287,6 @@ f_max     = 250
 threshold = 0.5
 confirm_windows = 2    
 ```
----
 
 ##### Sound FFT filter Plugin — `sound_fft`
 
@@ -330,7 +315,6 @@ confirm_windows = 2
 
 **confirm_windows :** Number of consecutive FFT windows exceeding the threshold before reporting.
 
-
 #### Run
 
 The plugins can be launched with this command lines :
@@ -342,7 +326,7 @@ mads filter sound_fft.plugin -n sound_fft
 
 
 ### 5.3 Sink Plugins — `accel_fft_alarm_gui` & `sound_fft_alarm_gui`
----
+
 **Type :** MADS *Sink Plugins*
 
 #### Plugins included
@@ -405,7 +389,7 @@ f_max            = 4000
 
 **title :** Title of the GUI window.
 
-**fullscreen (sound FFT) :** Whether to display the GUI in fullscreen.
+**fullscreen :** Whether to display the GUI in fullscreen.
 
 **f_min / f_max :** GUI display band selection.
 
