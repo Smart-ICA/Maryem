@@ -248,7 +248,6 @@ The plugin can be launched with this command line :
 ```bash
 mads source buffered_sp.plugin -n buffered_sp
 ```
----
 
 ### 5.2 Filter Plugins — `accel_fft` & `sound_fft`
 
@@ -339,3 +338,9 @@ confirm_windows = 2
 
 #### Run
 ---
+The plugin can be launched with this command line :
+
+```bash
+mads filter accel_fft.plugin -n accel_fft
+mads filter sound_fft.plugin -n sound_fft
+```
