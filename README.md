@@ -288,7 +288,7 @@ The two plugins share the same operating principles, with different input signal
 
 #### MADS Configuration in the INI Settings
 
-The plugin supports the following settings in the `mads.ini` file :
+The plugins support the following settings in the `mads.ini` file :
 
 ---
 
@@ -321,3 +321,17 @@ confirm_windows = 2
 ```
 ---
 
+
+**sub_topic :** Topic containing the sensor data of sound and accelerations : Topic listens by the plugin (Ampere and arduino).
+
+**axis :** Axis of acceleration to process (x, y, z).
+
+**fs :** Expected sampling frequency output of the Arduino.
+
+**win_size :** Number of samples per FFT computation.
+
+**f_min / f_max :** Frequency band kept for analysis.
+
+**threshold :** Minimum amplitude that considers a frequency peak significant.
+
+**confirm_windows :** Number of consecutive FFT windows exceeding the threshold before reporting.
