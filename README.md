@@ -172,7 +172,11 @@ Reads NDJSON data from **multiple serial ports (two Arduinos)**, buffers it, tim
 
 ---
 
-#### Configuration Example (`mads.ini`)
+#### MADS Configuration in the INI settings
+
+The plugin supports the following settings in the INI file :
+
+##### Source Plugin for Arduino #2 — Accelerometer + Machine Microphone
 
 ```ini
 [source.buffered_sp]
