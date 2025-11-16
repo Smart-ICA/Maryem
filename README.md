@@ -53,47 +53,82 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ---
 
-## 🔌 1. Arduino Programs
+# 🔧 1. Arduino Programs
 
-The `Arduino/` folder contains the firmwares used to acquire raw sensor data from **two independent Arduino Uno boards**, each connected to a different serial port.
+The folder `Arduino/` contains the two independent firmwares used to acquire raw sensor data required by the MADS acquisition pipeline.
 
-- **Arduino Uno 1** → `/dev/ttyACM0`  
-  **Measures:**
-  - Machine electrical **current** and **power**  (via SCT-013 sensor + signal conditioning)
-  - External **environmental sound** level (microphone placed near the CNC)
-
-- **Arduino Uno 2** → `/dev/ttyACM1`  
-  **Measures:**
-  - **3-axis accelerations** of the CNC mandrel
-  - Machine **sound** (microphone mounted inside the machine)
-
-Both Arduinos send data as **newline-delimited JSON (NDJSON)** at **1,000,000 baud**.
+Two **Arduino Uno boards** are used simultaneously, each connected on a different serial port and streaming newline-delimited JSON (NDJSON).
 
 ---
 
-### 🧩 Available Firmwares
+## 🛰️ Arduino Uno #1 – Accelerations + Machine Sound
 
-| File | Description |
-|------|--------------|
-| [`Current_Micro1_JSON.ino`](Arduino/Current_Micro1_JSON.ino) | Reads current of the machine and sound level of the external environment and outputs NDJSON (Arduino Uno 1) |
-| [`Micro2_Accelerometre_JSON.ino`](Arduino/Micro2_Accelerometre_JSON.ino) | Reads accelerations (x, y, z) and sound level of the machine and outputs NDJSON (Arduino Uno 2) |
+🔌 **Serial Port:** `/dev/ttyACM0`
+📟 **Firmware:** `Micro2_Accelerometre_JSON.ino`
 
----
+This Arduino reads:
 
-### 📤 Output Format
+* 3-axis accelerations of the CNC machine
+* Sound level measured directly on the machine structure
 
-Arduino sends **newline-delimited JSON (NDJSON)**:
+It packages the measurements into the following JSON frame:
 
 ```json
 {
-  "millis": 158426,
-  "acceleration": { "x_g": 0.27, "y_g": -0.98, "z_g": 0.03 },
-  "sound_level": 69,
-  "I_A": 1.42,
-  "P_W": 533.68,
+  "millis": ...,
+  "acceleration": { "x_g": ..., "y_g": ..., "z_g": ... },
+  "sound_level": ...
 }
+```
+
+**Fields:**
+
+* `millis` → Arduino internal timestamp
+* `acceleration.x_g / y_g / z_g` → vibrations in g
+* `sound_level` → machine acoustic vibration level
 
 ---
+
+## 🛰️ Arduino Uno #2 – Current, Power & External Sound
+
+🔌 **Serial Port:** `/dev/ttyACM1`
+📟 **Firmware:** `Current_Micro1_JSON.ino`
+
+This Arduino is dedicated to:
+
+* Measuring the spindle current using SCT-013 on a DFRobot Gravity V7 interface
+* Computing instantaneous power using
+  `P = √3 × U × I × cosφ`, with `U = 250 V`, `cosφ ≈ 0.85`
+* Recording the external environmental sound level near the CNC enclosure
+
+It sends JSON frames of the form:
+
+```json
+{
+  "millis": ...,
+  "I_A": ...,
+  "P_W": ...,
+  "sound_level": ...
+}
+```
+
+**Fields:**
+
+* `I_A` → RMS spindle current (A)
+* `P_W` → computed electrical power (W)
+* `sound_level` → external acoustic level near the CNC
+
+---
+
+## 📡 Serial Communication Summary
+
+| Arduino    | Sensors                               | Port           | Baud Rate     | File                            |
+| ---------- | ------------------------------------- | -------------- | ------------- | ------------------------------- |
+| **Uno #1** | Accelerations (x,y,z) + machine sound | `/dev/ttyACM0` | **1,000,000** | `Micro2_Accelerometre_JSON.ino` |
+| **Uno #2** | Current, power, external sound        | `/dev/ttyACM1` | **1,000,000** | `Current_Micro1_JSON.ino`       |
+
+---
+
 
 🧠 2. Buffered_sp_plugin (Source Plugin)
 Description
@@ -104,4 +139,7 @@ Type
 ➡️ Source Plugin
 
 ---
+
+
+
 
