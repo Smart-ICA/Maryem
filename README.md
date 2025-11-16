@@ -53,7 +53,7 @@ The goal of this project is to build an **open-source and modular system** that 
 
 ---
 
-# 🔧 3. Arduino Programs
+🔧 3. Arduino Programs
 
 The folder `Arduino/` contains the two independent firmwares used to acquire raw sensor data required by the MADS acquisition pipeline.
 
@@ -132,7 +132,7 @@ It sends JSON frames of the form:
 ---
 
 
-# ⚙️ 4. Compilation & Installation (Linux / MADS)
+ ⚙️ 4. Compilation & Installation (Linux / MADS)
 
 All C++ plugins follow the standard MADS build procedure.
 
