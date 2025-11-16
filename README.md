@@ -20,7 +20,6 @@ All plugins are written in C++ for the MADS framework and designed to run on Lin
 
 ## 🧩 1. Global Description
 ---
-
 The goal of this project is to build an **open-source and modular system** that acquires data from physical sensors, processes it in real time, and stores it for later analysis.
 
 ### The complete data chain: 
@@ -402,4 +401,76 @@ The plugins can be launched with this command lines :
 ```bash
 mads sink accel_fft_alarm_gui.plugin -n accel_fft_alarm_gui
 mads sink sound_fft_alarm_gui.plugin -n sound_fft_alarm_gui
+```
+
+### 5.4 Sink Plugin — `web_dashboard`
+
+**Type :** MADS *Sink Plugin*
+
+#### Plugin included
+- `web_dashboard`
+
+
+#### Purpose
+
+The web_dashboard plugin provides a real-time web-based interface to visualize sensor data coming from the two Arduinos.
+It creates a lightweight HTTP server that continuously refreshes numerical values, allowing an operator to monitor:
+
+- spindle current
+- estimated power
+- machine vibration (x, y, z)
+- machine sound level
+
+This dashboard is accessible from any browser connected to the same network.
+
+#### Features
+
+- Real-time live monitoring
+- Auto-refresh using a configurable refresh rate
+- Custom HTML/CSS/JS interface
+- Simple deployment on any Linux machine (Raspberry Pi, server, etc...)
+- Fully configurable from the mads.ini file
+- Displays data from both Arduino sources in a clean web UI
+
+#### MADS Configuration in the INI Settings
+
+The plugins support the following settings in the `mads.ini` file :
+
+```ini
+[web_dashboard]
+sub_topic = ["Mytopic"]
+http_host  = "0.0.0.0"
+http_port  = 8088
+title      = "Monitoring Capteurs – Ampere"
+refresh_ms = 500
+static_dir = "/path/to directory containing static files (CSS, JS)"
+```
+
+**sub_topic :** Topic to listen to (sensor messages coming from the current sensor + accelerometer + microphone Arduinos).
+
+**http_host :** IP interface on which the web server runs.
+"0.0.0.0" = accessible from any device on the network.
+
+**http_port :** Port of the dashboard (e.g., open browser at http://<machine-ip>:8088).
+
+**title :** Title displayed at the top of the web dashboard.
+
+**refresh_ms :** Refresh interval in milliseconds.
+
+**static_dir :** Folder containing CSS and optional JS assets.
+
+
+#### Run
+
+Launch the dashboard from a terminal:
+```bash
+mads sink web_dashboard.plugin -n web_dashboard
+```
+Then open your browser at:
+```bash
+http://localhost:8088
+```
+Or from another device on the same network:
+```bash
+http://<your-machine-ip>:8088
 ```
