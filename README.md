@@ -671,3 +671,14 @@ All graphs are saved automatically in `/tmp/` or in the script’s configured ou
 They can be used directly for diagnostics or machine learning preprocessing.
 
 ```
+## 🤝 Project collaboration
+
+This work is part of a final year project (PFE) carried out within the ICA laboratory.
+
+It is part of a collaborative project with the company  Renault Ampere.
+
+## 🏭 Contribution
+
+Author: Maryem LHAMYANI (INSA Toulouse)
+
+Contributors: Anna-Carla Araujo (INSA Toulouse - ICA) & Paolo BOSETTI (University of Trento)
