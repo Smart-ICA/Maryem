@@ -613,7 +613,7 @@ pip install pymongo matplotlib numpy scipy
 
 The scripts read data from:
 
-- **The MongoDB collection** populated by the MADS plugins (`buffered_sp` + sinks),
+- **The MongoDB collection** populated by the MADS plugins (from `buffered_sp` plugin),
 - Data recorded during machining of **an aluminum cylindrical part** using three different operations:
   - Rough dressing (*dressage ébauche*)
   - Finishing (*dressage finition*)
@@ -648,9 +648,7 @@ python3 plot_current_from_mongo.py
 * Spindle current curve
 * Power curve computed from the formula:
 
-[
-P = \sqrt{3} \cdot U \cdot I \cdot \cos\varphi
-]
+`P = √3 × U × I × cosφ`
 
 * Comparison against thresholds or machine logs
 
