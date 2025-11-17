@@ -11,7 +11,7 @@ It includes:
 
 - GUI and alerting plugins
 
-- A web dashboard
+- A web dashboard display
 
 - Tools for plotting data from MongoDB
 
@@ -31,7 +31,7 @@ The goal of this project is to build an **open-source and modular system** that 
 3. **MADS Source Plugin (Buffered_sp_plugin)** : real-time data collection via serial ports  
 4. **Processing Plugins** : FFT and filtering
 5. **MongoDB** : database for real-time data storage 
-6. **Sinks** : overpower alert detection and web dashboard  
+6. **Sinks** : overpower alert detection and web dashboard display
 7. **Visualization Tools** : plot data using Python language
     
 ---
