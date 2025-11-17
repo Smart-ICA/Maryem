@@ -609,19 +609,67 @@ All scripts require:
 pip install pymongo matplotlib numpy scipy
 ```
 
-#### 📦 Data Source
+#### 📁 Data Source
+
 The scripts read data from:
 
-- The MongoDB collection populated by the MADS plugins (from buffered_sp plugin),
+- **The MongoDB collection** populated by the MADS plugins (`buffered_sp` + sinks),
+- Data recorded during machining of **an aluminum cylindrical part** using three different operations:
+  - Rough dressing (*dressage ébauche*)
+  - Finishing (*dressage finition*)
+  - Drilling (*perçage*)
+  - Optional fourth operation: radius machining (*usinage rayon*)
 
-- Data recorded during machining of an aluminum cylindrical part using three different operations:
+Each document contains numerical batches of samples acquired in real time from Arduino.
 
-+ Rough dressing (dressage ébauche)
 
-Finishing (dressage finition)
+#### ▶️ How to Run Each Script
 
-Drilling (perçage)
+##### 1. Plot accelerometer FFT
 
-Optional fourth operation: radius machining (usinage rayon)
+```bash
+python3 plot_accelfft_from_mongo.py
+````
 
-Each document contains numerical batches of samples acquired in real time from Arduino sensors.
+**Produces:**
+
+* FFT spectrum for **X, Y, Z axes**
+* Identification of dominant vibration frequencies
+* Useful for chatter detection and machine condition monitoring
+
+##### 2. Plot current and power
+
+```bash
+python3 plot_current_from_mongo.py
+```
+
+**Produces:**
+
+* Spindle current curve
+* Power curve computed from the formula:
+
+[
+P = \sqrt{3} \cdot U \cdot I \cdot \cos\varphi
+]
+
+* Comparison against thresholds or machine logs
+
+##### 3. Plot sound spectrum
+
+```bash
+python3 plot_sound_from_mongo.py
+```
+
+**Produces:**
+
+* Acoustic signal spectrum
+* Identification of dominant noise frequencies
+* Helps correlate sound anomalies with vibration events
+
+#### 📊 Output
+
+All graphs are saved automatically in `/tmp/` or in the script’s configured output folder.
+
+They can be used directly for diagnostics or machine learning preprocessing.
+
+```
