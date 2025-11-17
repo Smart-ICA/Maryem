@@ -500,6 +500,34 @@ This plugin is intended to warn operators of abnormal cutting power, possible to
 - Historical logging of all alerts in JSONL
 - Fully configurable via mads.ini
 
+#### Google API Authentication (Gmail OAuth2)
+
+The `overpower_email` plugin sends alert emails using the Gmail API, which requires an OAuth2 authentication step.
+The setup is done once, and the token is then reused automatically.
+
+##### Summary of the Authentication Process 
+- You must create a Google Cloud project and enable the Gmail API.
+- Generate OAuth2 credentials (“OAuth Client ID”) and download the file `credentials.json`.
+- Place `credentials.json` in the same folder as `email_alert`.py.
+- On the first execution of the plugin, a browser window will open asking you to authorize the application.
+- After successful authentication, a file `token.json` is created and stored locally.
+This token is reused for all subsequent email sending operations, so you don’t need to authenticate again.
+
+##### Python Environment
+We recommend using a dedicated virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install numpy # also install other necessary Python libs
+```
+Configure this Python interpreter in `mads.ini` using:
+
+```bash
+python_path    = "/path/to/venv/bin/python3"
+```
+This completes the Gmail API setup for secure automated alert emails.
+
 #### MADS Configuration in the INI Settings
 
 The plugin support the following settings in the `mads.ini` file :
