@@ -616,7 +616,7 @@ The scripts read data from:
 
 - Data recorded during machining of an aluminum cylindrical part using three different operations:
 
-Rough dressing (dressage ébauche)
++ Rough dressing (dressage ébauche)
 
 Finishing (dressage finition)
 
