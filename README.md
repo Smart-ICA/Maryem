@@ -588,3 +588,40 @@ The plugins can be launched with this command lines :
 mads sink overpower_email.plugin -n overpower_email
 ```
 The GUI window starts automatically when power exceeds the threshold.
+
+### 5.6 Python Tools for Offline Data Visualization (MongoDB_Data)
+The folder MongoDB_Data/ contains Python scripts used to load, process, and plot sensor data stored in MongoDB during machining operations.
+These tools are essential for analyzing vibration, current consumption, and sound signals collected during the three machining operations (rough dressing, finishing, drilling).
+
+#### 📂 Available Scripts
+
+| File                      | Description                                                                                     |
+|--------------------------|-------------------------------------------------------------------------------------------------|
+| `plot_accelfft_from_mongo.py` | Loads accelerometer data from MongoDB, computes FFT, and plots vibration spectra (X/Y/Z axes). |
+| `plot_current_from_mongo.py`  | Extracts current and/or estimated power over time from the database and plots the spindle electrical behavior. |
+| `plot_sound_from_mongo.py`    | Loads microphone data and plots sound level or FFT spectrum for acoustic analysis during machining. |
+
+
+#### 🔧 Requirements
+All scripts require:
+
+```bash
+pip install pymongo matplotlib numpy scipy
+```
+
+#### 📦 Data Source
+The scripts read data from:
+
+- The MongoDB collection populated by the MADS plugins (from buffered_sp plugin),
+
+- Data recorded during machining of an aluminum cylindrical part using three different operations:
+
+Rough dressing (dressage ébauche)
+
+Finishing (dressage finition)
+
+Drilling (perçage)
+
+Optional fourth operation: radius machining (usinage rayon)
+
+Each document contains numerical batches of samples acquired in real time from Arduino sensors.
